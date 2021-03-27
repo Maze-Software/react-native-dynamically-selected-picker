@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, ScrollView, Platform} from 'react-native';
+import { StyleSheet, View, ScrollView, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import PickerListItem from './PickerListItem';
 
@@ -42,7 +42,7 @@ export default class DynamicallySelectedPicker extends React.Component {
   }
 
   onScroll(event) {
-    const {items, onScroll} = this.props;
+    const { items, onScroll } = this.props;
     const tempIndex = this.getItemTemporaryIndex(event);
     if (
       this.state.itemIndex !== tempIndex &&
@@ -50,47 +50,47 @@ export default class DynamicallySelectedPicker extends React.Component {
       tempIndex < this.allItemsLength()
     ) {
       this.setItemIndex(tempIndex);
-      onScroll({index: tempIndex, item: items[tempIndex]});
+      onScroll({ index: tempIndex, item: items[tempIndex] });
     }
   }
 
   onMomentumScrollBegin(event) {
-    const {items, onMomentumScrollBegin} = this.props;
+    const { items, onMomentumScrollBegin } = this.props;
     const tempIndex = this.getItemTemporaryIndex(event);
 
     if (tempIndex >= 0 && tempIndex < this.allItemsLength()) {
       this.setItemIndex(tempIndex);
-      onMomentumScrollBegin({index: tempIndex, item: items[tempIndex]});
+      onMomentumScrollBegin({ index: tempIndex, item: items[tempIndex] });
     }
   }
 
   onMomentumScrollEnd(event) {
-    const {items, onMomentumScrollEnd} = this.props;
+    const { items, onMomentumScrollEnd } = this.props;
     const tempIndex = this.getItemTemporaryIndex(event);
 
     if (tempIndex >= 0 && tempIndex < this.allItemsLength()) {
       this.setItemIndex(tempIndex);
-      onMomentumScrollEnd({index: tempIndex, item: items[tempIndex]});
+      onMomentumScrollEnd({ index: tempIndex, item: items[tempIndex] });
     }
   }
 
   onScrollBeginDrag(event) {
-    const {items, onScrollBeginDrag} = this.props;
+    const { items, onScrollBeginDrag } = this.props;
     const tempIndex = this.getItemTemporaryIndex(event);
 
     if (tempIndex >= 0 && tempIndex < this.allItemsLength()) {
       this.setItemIndex(tempIndex);
-      onScrollBeginDrag({index: tempIndex, item: items[tempIndex]});
+      onScrollBeginDrag({ index: tempIndex, item: items[tempIndex] });
     }
   }
 
   onScrollEndDrag(event) {
-    const {items, onScrollEndDrag} = this.props;
+    const { items, onScrollEndDrag } = this.props;
     const tempIndex = this.getItemTemporaryIndex(event);
 
     if (tempIndex >= 0 && tempIndex < this.allItemsLength()) {
       this.setItemIndex(tempIndex);
-      onScrollEndDrag({index: tempIndex, item: items[tempIndex]});
+      onScrollEndDrag({ index: tempIndex, item: items[tempIndex] });
     }
   }
 
@@ -107,7 +107,7 @@ export default class DynamicallySelectedPicker extends React.Component {
   }
 
   extendedItems() {
-    const {transparentItemRows} = this.props;
+    const { transparentItemRows } = this.props;
     return [
       ...this.fakeItems(transparentItemRows),
       ...this.props.items,
@@ -116,7 +116,7 @@ export default class DynamicallySelectedPicker extends React.Component {
   }
 
   render() {
-    const {itemIndex, itemHeight} = this.state;
+    const { itemIndex, itemHeight } = this.state;
     const {
       width,
       height,
@@ -129,7 +129,7 @@ export default class DynamicallySelectedPicker extends React.Component {
       selectedItemBorderColor,
     } = this.props;
     return (
-      <View style={{height: height, width: width}}>
+      <View style={{ height: height, width: width }}>
         <ScrollView
           ref={(ref) => {
             this.scrollViewRef = ref;
@@ -159,6 +159,7 @@ export default class DynamicallySelectedPicker extends React.Component {
             return (
               <PickerListItem
                 key={index}
+                selected={this.state.itemIndex == item.value}
                 label={item.label}
                 itemColor={item.itemColor}
                 allItemsColor={allItemsColor}
@@ -179,7 +180,7 @@ export default class DynamicallySelectedPicker extends React.Component {
             styles.gradientWrapper,
             {
               top: 0,
-              borderBottomWidth: 1,
+              borderBottomWidth: 0,
               borderBottomColor: selectedItemBorderColor,
             },
           ]}
@@ -199,7 +200,7 @@ export default class DynamicallySelectedPicker extends React.Component {
             styles.gradientWrapper,
             {
               bottom: 0,
-              borderTopWidth: 1,
+              borderTopWidth: 0,
               borderTopColor: selectedItemBorderColor,
             },
           ]}
@@ -208,7 +209,7 @@ export default class DynamicallySelectedPicker extends React.Component {
             colors={bottomGradientColors}
             style={[
               styles.pickerGradient,
-              {height: transparentItemRows * itemHeight},
+              { height: transparentItemRows * itemHeight },
             ]}
           />
         </View>
@@ -218,12 +219,12 @@ export default class DynamicallySelectedPicker extends React.Component {
 }
 
 DynamicallySelectedPicker.defaultProps = {
-  items: [{value: 0, label: 'No items', itemColor: 'red'}],
-  onScroll: () => {},
-  onScrollBeginDrag: () => {},
-  onScrollEndDrag: () => {},
-  onMomentumScrollBegin: () => {},
-  onMomentumScrollEnd: () => {},
+  items: [{ value: 0, label: 'No items', itemColor: 'red' }],
+  onScroll: () => { },
+  onScrollBeginDrag: () => { },
+  onScrollEndDrag: () => { },
+  onMomentumScrollBegin: () => { },
+  onMomentumScrollEnd: () => { },
   width: 300,
   height: 300,
   initialSelectedIndex: 0,
