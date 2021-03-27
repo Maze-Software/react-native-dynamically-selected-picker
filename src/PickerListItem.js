@@ -10,7 +10,6 @@ export default function PickerListItem({
   selected,
   fontFamily = 'SFUIDisplay-Bold',
 }) {
-  // console.log("sel", selected)
   return (
     <View style={style}>
       <Text
