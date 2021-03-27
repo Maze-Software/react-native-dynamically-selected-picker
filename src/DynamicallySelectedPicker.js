@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, ScrollView, Platform} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 import PickerListItem from './PickerListItem';
 
 export default class DynamicallySelectedPicker extends React.Component {
